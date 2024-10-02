@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "475px",
+      },
       colors: {
         primary: {
           "100": "#FFE8F0",
@@ -36,6 +39,7 @@ const config: Config = {
       },
       boxShadow: {
         100: "2px 2px 0px 0px rgb(0,0,0)",
+        200: "2px 2px 0px 2px rgb(0,0,0)",
       },
     },
   },
