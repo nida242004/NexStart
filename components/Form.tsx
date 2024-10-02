@@ -101,7 +101,7 @@ const Form = () => {
         />
       </div>
 
-      <div>
+      <div data-color-mode="light">
         <label
           htmlFor="pitch"
           className="font-bold text-[18px] text-black uppercase"

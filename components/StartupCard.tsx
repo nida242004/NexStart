@@ -4,6 +4,7 @@ import { cn, formatDate } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 const StartupCard = ({ post }) => {
   return (
@@ -44,8 +45,11 @@ const StartupCard = ({ post }) => {
 
       <div className="flex justify-between items-center gap-3 mt-5">
         <p className="font-medium text-[16px]">{post.category}</p>
-        <Button className="rounded-full !bg-black-200 font-medium text-[16px] text-white px-5 py-3">
-          Details
+        <Button
+          className="rounded-full !bg-black-200 font-medium text-[16px] text-white px-5 py-3"
+          asChild
+        >
+          <Link href={`/idea/${post._id}`}>Details</Link>
         </Button>
       </div>
     </li>
