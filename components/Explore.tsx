@@ -7,7 +7,6 @@ import StartupCard, { Fallback } from "@/components/StartupCard";
 
 const Explore = async () => {
   const { data: posts } = await sanityFetch({ query: IDEAS_QUERY });
-  console.log(JSON.stringify(posts, null, 2));
 
   return (
     <>
