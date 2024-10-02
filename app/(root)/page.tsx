@@ -3,7 +3,7 @@ import StartupCard from "@/components/StartupCard";
 
 function Home() {
   return (
-    <main className="">
+    <>
       <section className="w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6">
         <p className="bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative before-tri after-tri">
           Pitch, Vote and Grow
@@ -38,7 +38,7 @@ function Home() {
           ))}
         </ul>
       </section>
-    </main>
+    </>
   );
 }
 

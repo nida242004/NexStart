@@ -30,3 +30,7 @@
     @apply after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-transparent;
   }
 }
+
+.w-md-editor-toolbar {
+  padding: 10px !important;
+}
