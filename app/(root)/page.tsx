@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
-import StartupCard from "@/components/StartupCard";
+
+import Explore from "@/components/Explore";
 
 function Home() {
   return (
@@ -32,11 +33,7 @@ function Home() {
       <section className="px-5 py-10 max-w-7xl mx-auto">
         <p className="font-semibold text-[30px] text-black">Explore Startups</p>
 
-        <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
-          {[0, 1, 2, 3, 4].map((_, index: number) => (
-            <StartupCard key={index} />
-          ))}
-        </ul>
+        <Explore />
       </section>
     </>
   );
