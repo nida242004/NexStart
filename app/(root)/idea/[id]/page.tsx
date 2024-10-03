@@ -1,18 +1,16 @@
+import { Suspense } from "react";
 import markdownit from "markdown-it";
-import { unstable_after as after } from "next/server";
+import { notFound } from "next/navigation";
 
 import { formatDate } from "@/lib/utils";
+
+import View from "@/components/View";
 import { client } from "@/sanity/lib/client";
 import { IDEA_BY_ID_QUERY } from "@/sanity/lib/queries";
-import { server } from "@/sanity/lib/server";
-import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const md = markdownit();
-
-const Fallback = () => {
-  return <Skeleton className="bg-zinc-400 px-6 py-3" />;
-};
+export const experimental_ppr = true;
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
@@ -20,26 +18,16 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const post = await client.fetch(IDEA_BY_ID_QUERY, {
     id: id,
   });
+  if (!post) return notFound();
 
   const parsedContent = md.render(post?.pitch || "");
-
-  after(async () => {
-    console.log("coming in after", id, post.views);
-    await server
-      .patch(id)
-      .set({ views: post.views + 1 })
-      .commit();
-  });
 
   return (
     <>
       <section className="w-full bg-primary min-h-[230px] pattern flex justify-center items-center flex-col py-10 px-6">
-        <Suspense fallback={<Fallback />}>
-          <p className="bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative before-tri after-tri">
-            {/*{formatDate(post._createdAt)}*/}
-            {post.views}
-          </p>
-        </Suspense>
+        <p className="bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative before-tri after-tri">
+          {formatDate(post._createdAt)}
+        </p>
 
         <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-bold text-white sm:text-[54px] text-[36px] max-w-5xl text-center my-5">
           {post.title}
@@ -66,6 +54,14 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
         )}
       </section>
+
+      <Suspense
+        fallback={
+          <Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />
+        }
+      >
+        <View id={id} totalViews={post.views} />
+      </Suspense>
     </>
   );
 }
