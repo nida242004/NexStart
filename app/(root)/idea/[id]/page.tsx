@@ -92,7 +92,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />
         }
       >
-        <View id={id} totalViews={post.views} />
+        <View id={id} />
       </Suspense>
     </>
   );
