@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 
-import { auth } from "@/auth";
 import { client } from "@/sanity/lib/client";
 import { IDEAS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
 
@@ -11,17 +10,17 @@ import { Idea } from "@/sanity/types";
 
 export const experimental_ppr = true;
 
-async function Page({ params }: { params: { id: string } }) {
-  const session = auth();
+async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const id = (await params).id;
 
   const posts = await client.fetch(IDEAS_BY_AUTHOR_QUERY, {
-    id: params.id,
+    id: id,
   });
 
   return (
     <>
       <section className="w-full pb-10 pt-20 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10">
-        <UserCard id={params.id} />
+        <UserCard id={id} />
 
         <Suspense fallback={<p>Loading...</p>}>
           <ul className="flex-1 grid sm:grid-cols-2 gap-5">

@@ -14,17 +14,19 @@ const Fallback = () => {
   return <Skeleton className="bg-zinc-400 px-6 py-3" />;
 };
 
-async function Page({ params }: { params: { id: string } }) {
+async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const id = (await params).id;
+
   const post = await client.fetch(IDEA_BY_ID_QUERY, {
-    id: params.id,
+    id: id,
   });
 
   const parsedContent = md.render(post?.pitch || "");
 
   after(async () => {
-    console.log("coming in after", params.id, post.views);
+    console.log("coming in after", id, post.views);
     await server
-      .patch(params.id)
+      .patch(id)
       .set({ views: post.views + 1 })
       .commit();
   });
