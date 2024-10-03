@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Suspense } from "react";
 import markdownit from "markdown-it";
 import { notFound } from "next/navigation";
@@ -41,13 +40,13 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-bold text-white sm:text-[54px] text-[36px] max-w-5xl text-center my-5">
           {post.title}
         </h1>
-        <p className="font-medium text-[20px] text-white max-w-2xl text-center">
+        <p className="font-medium text-[20px] text-white max-w-2xl text-center break-all">
           {post.description}
         </p>
       </section>
 
       <section className="py-10 px-6 max-w-7xl mx-auto">
-        <Image
+        <img
           src={post.image}
           alt="image"
           className="w-full h-auto rounded-xl"
@@ -55,7 +54,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <Link href={`/user/${post.author?._id}`}>
-            <Image
+            <img
               src={post.author.image}
               alt="image"
               className="size-16 rounded-full mb-3"
@@ -64,7 +63,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           <h3 className="font-bold text-[30px]">Pitch Details</h3>
           {parsedContent ? (
             <article
-              className="prose max-w-4xl font-work-sans"
+              className="prose max-w-4xl font-work-sans break-all"
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
