@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
+import { auth } from "@/auth";
+
 import { client } from "@/sanity/lib/client";
 import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
 
@@ -11,11 +13,9 @@ export const experimental_ppr = true;
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
+  const session = await auth();
 
-  const user = await client.fetch(AUTHOR_BY_ID_QUERY, {
-    id: id,
-  });
-
+  const user = await client.fetch(AUTHOR_BY_ID_QUERY, { id: id });
   if (!user) return notFound();
 
   return (
@@ -41,11 +41,16 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </p>
         </div>
 
-        <ul className="flex-1 grid sm:grid-cols-2 gap-5">
-          <Suspense fallback={<StartupCardSkeleton />}>
-            <UserStartups id={id} />
-          </Suspense>
-        </ul>
+        <div className="flex-1 flex flex-col gap-5">
+          <p className="text-[30px] font-bold">
+            {session?.id === id ? "Your" : "Other's"} Startups
+          </p>
+          <ul className="grid sm:grid-cols-2 gap-5">
+            <Suspense fallback={<StartupCardSkeleton />}>
+              <UserStartups id={id} />
+            </Suspense>
+          </ul>
+        </div>
       </section>
     </>
   );

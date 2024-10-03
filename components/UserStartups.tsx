@@ -6,9 +6,7 @@ import { IDEAS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
 import StartupCard from "@/components/StartupCard";
 
 const UserStartups = async ({ id }: { id: string }) => {
-  const posts = await client.fetch(IDEAS_BY_AUTHOR_QUERY, {
-    id: id,
-  });
+  const posts = await client.fetch(IDEAS_BY_AUTHOR_QUERY, { id: id });
 
   return (
     <>

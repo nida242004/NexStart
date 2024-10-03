@@ -25,6 +25,7 @@ export const IDEA_BY_ID_QUERY =
   slug,
   _createdAt,
   author->{
+    _id,
     name,
     slug,
     image,

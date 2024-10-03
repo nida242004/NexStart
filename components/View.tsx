@@ -1,17 +1,7 @@
-// import { unstable_after as after } from "next/server";
-
 import Ping from "@/components/Ping";
 import { server } from "@/sanity/lib/server";
 
 const View = async ({ id, totalViews }: { id: string; totalViews: number }) => {
-  // after(async () => {
-  //   console.log("coming in after", id, totalViews);
-  //   await server
-  //     .patch(id)
-  //     .set({ views: totalViews + 1 })
-  //     .commit();
-  // });
-
   await server
     .patch(id)
     .set({ views: totalViews + 1 })
