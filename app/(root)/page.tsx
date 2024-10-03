@@ -1,8 +1,13 @@
-import { Search } from "lucide-react";
-
 import Explore from "@/components/Explore";
+import SearchForm from "@/components/SearchForm";
 
-function Home() {
+function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const query = searchParams?.query as string;
+
   return (
     <>
       <section className="w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6">
@@ -18,22 +23,13 @@ function Home() {
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
         </p>
 
-        <div className="max-w-3xl w-full min-h-[80px] bg-white border-[5px] border-black rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5">
-          <input
-            className="flex-1 placeholder:font-bold placeholder:text-black w-full h-auto outline-none"
-            placeholder="Search Startup"
-          />
-
-          <div className="size-[50px] rounded-full bg-black flex justify-center items-center">
-            <Search className="size-[20px] text-white" />
-          </div>
-        </div>
+        <SearchForm />
       </section>
 
       <section className="px-5 py-10 max-w-7xl mx-auto">
         <p className="font-semibold text-[30px] text-black">Explore Startups</p>
 
-        <Explore />
+        <Explore query={query} />
       </section>
     </>
   );

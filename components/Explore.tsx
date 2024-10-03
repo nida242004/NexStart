@@ -1,20 +1,31 @@
 import { Suspense } from "react";
 
-import { IDEAS_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-
+import { IDEAS_QUERY, SEARCH_QUERY } from "@/sanity/lib/queries";
 import StartupCard, { Fallback } from "@/components/StartupCard";
 
-const Explore = async () => {
-  const { data: posts } = await sanityFetch({ query: IDEAS_QUERY });
+const Explore = async ({ query }: { query: string }) => {
+  let posts;
+
+  if (query) {
+    posts = await client.fetch(SEARCH_QUERY, { search: query.toLowerCase() });
+  } else {
+    const result = await sanityFetch({ query: IDEAS_QUERY });
+    posts = result.data;
+  }
 
   return (
     <>
       <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
         <Suspense fallback={<Fallback />}>
-          {posts.map((post, index: number) => (
-            <StartupCard key={index} post={post} />
-          ))}
+          {posts?.length > 0 ? (
+            posts.map((post, index: number) => (
+              <StartupCard key={index} post={post} />
+            ))
+          ) : (
+            <p className="text-black-100 text-sm">No results found</p>
+          )}
         </Suspense>
       </ul>
       <SanityLive />

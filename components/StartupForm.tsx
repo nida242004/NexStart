@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-const Form = () => {
+const StartupForm = () => {
   const [pitch, setPitch] = useState("");
 
   const [state, formAction, isPending] = useActionState(
@@ -142,4 +142,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default StartupForm;

@@ -1,4 +1,4 @@
-import Form from "@/components/Form";
+import StartupForm from "@/components/StartupForm";
 
 function Page() {
   return (
@@ -9,7 +9,7 @@ function Page() {
         </h1>
       </section>
 
-      <Form />
+      <StartupForm />
     </>
   );
 }

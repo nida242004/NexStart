@@ -86,3 +86,21 @@ export const IDEAS_BY_AUTHOR_QUERY =
   category, 
   image, 
 }`);
+
+export const SEARCH_QUERY = defineQuery(
+  `*[_type == "idea" && (title match $search || category match $search || author->name match $search)][0...12]{
+  _id, 
+  title, 
+  slug, 
+  _createdAt,
+  author->{
+    _id,
+    name,
+    slug,
+    image,
+  }, 
+  description, 
+  category, 
+  image, 
+}`,
+);
