@@ -48,7 +48,7 @@ const Navbar = async () => {
                     <Link href={`/user/${session?.id}`}>My Profile</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/(root)/startup/create">Submit Proposal</Link>
+                    <Link href="/startup/create">Submit Proposal</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="text-red-600 font-bold mt-5">
                     <form
