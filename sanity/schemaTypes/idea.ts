@@ -22,6 +22,10 @@ export const idea = defineType({
       to: { type: "author" },
     }),
     defineField({
+      name: "views",
+      type: "number",
+    }),
+    defineField({
       name: "description",
       type: "text",
     }),

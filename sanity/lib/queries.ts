@@ -30,6 +30,7 @@ export const IDEA_BY_ID_QUERY =
     image,
     bio
   },
+  views,
   description,
   category,
   image,
