@@ -119,3 +119,9 @@ export const SEARCH_QUERY = defineQuery(
   image, 
 }`,
 );
+
+export const IDEA_VIEWS_QUERY =
+  defineQuery(`*[_type == "idea" && _id == $id][0]{
+  _id,
+  views
+}`);

@@ -52,6 +52,8 @@ const StartupForm = () => {
         error: "An unexpected error occurred",
         status: "ERROR",
       };
+    } finally {
+      setPitch("");
     }
   }
 
