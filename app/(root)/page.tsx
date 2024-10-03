@@ -1,12 +1,12 @@
 import Explore from "@/components/Explore";
 import SearchForm from "@/components/SearchForm";
 
-function Home({
+async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const query = searchParams?.query as string;
+  const query = (await searchParams).query as string;
 
   return (
     <>
