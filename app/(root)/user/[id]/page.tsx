@@ -7,6 +7,7 @@ import { IDEAS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
 import UserCard from "@/components/UserCard";
 import StartupCard from "@/components/StartupCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Idea } from "@/sanity/types";
 
 export const experimental_ppr = true;
 
@@ -28,7 +29,7 @@ async function Page({ params }: { params: { id: string } }) {
               <Suspense
                 fallback={<Skeleton className="bg-zinc-400 w-full h-72" />}
               >
-                {posts.map((post) => (
+                {posts.map((post: Idea) => (
                   <StartupCard key={post._id} post={post} />
                 ))}
               </Suspense>

@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
+import { Idea } from "@/sanity/types";
 import { cn, formatDate } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
 
-const StartupCard = ({ post }) => {
+const StartupCard = ({ post }: { post: Idea }) => {
   return (
     <li className="bg-white border-[5px] border-black py-6 px-5  rounded-[22px] shadow-200">
       <div className="flex justify-between items-center">
@@ -18,19 +19,22 @@ const StartupCard = ({ post }) => {
 
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${post.author._id}`}>
+          {/* @ts-ignore */}
+          <Link href={`/user/${post.author?._id!}`}>
             <p className="font-medium text-[16px] line-clamp-1">
-              {post.author.name}
+              {/*  @ts-ignore */}
+              {post.author?.name}
             </p>
           </Link>
           <h3 className="font-semibold text-[26px] line-clamp-1">
             {post.title}
           </h3>
         </div>
-
-        <Link href={`/user/${post.author._id}`}>
+        {/* @ts-ignore */}
+        <Link href={`/user/${post.author?._id}`}>
           <img
-            src={post.author.image}
+            // @ts-ignore
+            src={post.author?.image}
             alt="placeholder"
             className="size-12 rounded-full"
           />
