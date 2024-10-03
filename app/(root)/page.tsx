@@ -1,7 +1,5 @@
-import { Idea } from "@/sanity/types";
-
 import SearchForm from "@/components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupIdeaType } from "@/components/StartupCard";
 
 import { client } from "@/sanity/lib/client";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -45,7 +43,7 @@ async function Home({
 
         <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
           {posts?.length > 0 ? (
-            posts.map((post: Idea, index: number) => (
+            posts.map((post: StartupIdeaType, index: number) => (
               <StartupCard key={index} post={post} />
             ))
           ) : (

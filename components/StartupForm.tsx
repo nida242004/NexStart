@@ -7,72 +7,53 @@ import { ExternalLink } from "lucide-react";
 import { useState, useActionState } from "react";
 
 import { createIdea } from "@/lib/action";
+import { formSchema } from "@/lib/validation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  title: z.string().min(3, "Title is required").max(100, "Title is too long"),
-  description: z
-    .string()
-    .min(20, "Description should be at least 20 characters")
-    .max(500, "Description is too long. Max 500 characters at most"),
-  category: z
-    .string()
-    .min(3, "Category should be at least 3 characters")
-    .max(20, "Category is too long. Max 20 characters at most"),
-  link: z
-    .string()
-    .url("Invalid Image URL")
-    .refine(async (url) => {
-      try {
-        const res = await fetch(url, { method: "HEAD" });
-        const contentType = res.headers.get("content-type");
-        return contentType?.startsWith("image/");
-      } catch {
-        return false;
-      }
-    }, "URL must be a valid image"),
-  pitch: z.string().min(10, "Pitch should be at least 10 characters"),
-});
 
 const StartupForm = () => {
   const [pitch, setPitch] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [state, formAction, isPending] = useActionState(
-    async (prevState: any, formData: FormData) => {
-      try {
-        await formSchema.parseAsync({
-          title: formData.get("title"),
-          description: formData.get("description"),
-          category: formData.get("category"),
-          link: formData.get("link"),
-          pitch: pitch,
-        });
+  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+    error: "",
+    status: "IDEAL",
+  });
 
-        const result = await createIdea(prevState, formData, pitch);
-        if (result.status == "SUCCESS") redirect(`/idea/${result._id}`);
+  async function handleFormSubmit(prevState: any, formData: FormData) {
+    try {
+      const formValues = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        category: formData.get("category") as string,
+        link: formData.get("link") as string,
+        pitch,
+      };
 
-        return result;
-      } catch (error) {
-        if (error instanceof z.ZodError) {
-          const fieldErrors = error.flatten().fieldErrors;
-          setErrors(fieldErrors as unknown as Record<string, string>);
-          return { ...prevState, error: "Validation failed", status: "ERROR" };
-        }
-        return {
-          ...prevState,
-          error: "An unexpected error occurred",
-          status: "ERROR",
-        };
+      // Validate form values
+      await formSchema.parseAsync(formValues);
+
+      // Create the idea and handle the result
+      const result = await createIdea(prevState, formData, pitch);
+      if (result.status === "SUCCESS") {
+        redirect(`/idea/${result._id}`);
       }
-    },
-    {
-      error: "",
-      status: "IDEAL",
-    },
-  );
+      return result;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Handle validation errors
+        const fieldErrors = error.flatten().fieldErrors;
+        setErrors(fieldErrors as unknown as Record<string, string>);
+        return { ...prevState, error: "Validation failed", status: "ERROR" };
+      }
+      return {
+        ...prevState,
+        error: "An unexpected error occurred",
+        status: "ERROR",
+      };
+    }
+  }
 
   return (
     <form

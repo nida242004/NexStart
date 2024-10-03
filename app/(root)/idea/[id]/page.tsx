@@ -1,17 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import markdownit from "markdown-it";
 import { notFound } from "next/navigation";
 
 import { formatDate } from "@/lib/utils";
 
-import { Idea } from "@/sanity/types";
 import { client } from "@/sanity/lib/client";
 import { IDEA_BY_ID_QUERY, PLAYLIST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 
 import View from "@/components/View";
 import { Skeleton } from "@/components/ui/skeleton";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupIdeaType } from "@/components/StartupCard";
 
 const md = markdownit();
 export const experimental_ppr = true;
@@ -29,7 +29,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   ]);
 
   if (!post) return notFound();
-
   const parsedContent = md.render(post?.pitch || "");
 
   return (
@@ -48,7 +47,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       </section>
 
       <section className="py-10 px-6 max-w-7xl mx-auto">
-        <img
+        <Image
           src={post.image}
           alt="image"
           className="w-full h-auto rounded-xl"
@@ -56,7 +55,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <Link href={`/user/${post.author?._id}`}>
-            <img
+            <Image
               src={post.author.image}
               alt="image"
               className="size-16 rounded-full mb-3"
@@ -81,7 +80,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             <p className="font-semibold text-[30px] text-black">Editor Picks</p>
 
             <ul className="mt-7 grid sm:grid-cols-2 gap-5">
-              {editorPosts.map((post: Idea, index: number) => (
+              {editorPosts.map((post: StartupIdeaType, index: number) => (
                 <StartupCard key={index} post={post} />
               ))}
             </ul>

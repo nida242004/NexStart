@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
-import { Idea } from "@/sanity/types";
+import { Author, Idea } from "@/sanity/types";
 import { cn, formatDate } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const StartupCard = ({ post }: { post: Idea }) => {
+export type StartupIdeaType = Omit<Idea, "author"> & { author?: Author };
+
+const StartupCard = ({ post }: { post: StartupIdeaType }) => {
   return (
     <li className="bg-white border-[5px] border-black py-6 px-5  rounded-[22px] shadow-200">
       <div className="flex justify-between items-center">
@@ -19,10 +21,8 @@ const StartupCard = ({ post }: { post: Idea }) => {
 
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          {/* @ts-ignore */}
           <Link href={`/user/${post.author?._id!}`}>
             <p className="font-medium text-[16px] line-clamp-1">
-              {/*  @ts-ignore */}
               {post.author?.name}
             </p>
           </Link>
@@ -30,10 +30,8 @@ const StartupCard = ({ post }: { post: Idea }) => {
             {post.title}
           </h3>
         </div>
-        {/* @ts-ignore */}
         <Link href={`/user/${post.author?._id}`}>
           <img
-            // @ts-ignore
             src={post.author?.image}
             alt="placeholder"
             className="size-12 rounded-full"
