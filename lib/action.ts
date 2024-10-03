@@ -28,7 +28,6 @@ export const createIdea = async (state: any, form: FormData, pitch: string) => {
 
   try {
     const authorRefId = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
-      // @ts-ignore
       id: session?.id,
     });
 

@@ -4,7 +4,6 @@ import { Github } from "lucide-react";
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "@/auth";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = async () => {
@@ -27,16 +27,13 @@ const Navbar = async () => {
         <div className="flex items-center gap-5">
           {session && session?.user ? (
             <>
-              <Link
-                href="/idea/create"
-                className="text-black capitalize font-medium"
-              >
-                Submit Proposal
-              </Link>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="p-0">
-                    <Avatar className="w-10 h-10 border-2 border-black">
+                  <Button
+                    variant="ghost"
+                    className="p-0 focus-visible:ring-0 !bg-none rounded-full drop-shadow-md"
+                  >
+                    <Avatar className="size-10">
                       <AvatarImage
                         src={session?.user?.image || ""}
                         alt={session?.user?.name || ""}
@@ -47,16 +44,19 @@ const Navbar = async () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="w-56 border-2 border-black"
+                  className="w-56 border-[5px] border-black bg-white p-5 !rounded-2xl"
                 >
-                  <DropdownMenuItem className="font-bold">
+                  <DropdownMenuItem className="font-bold uppercase focus:bg-white">
                     {session?.user?.name}
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="font-bold">
-                    {session?.user?.email}
+                  <DropdownMenuSeparator className="my-5" />
+                  <DropdownMenuItem asChild>
+                    <Link href={`/user/${session?.id}`}>My Profile</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-red-600 font-bold">
+                  <DropdownMenuItem asChild>
+                    <Link href="/idea/create">Submit Proposal</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-red-600 font-bold mt-5">
                     <form
                       action={async () => {
                         "use server";
@@ -65,8 +65,13 @@ const Navbar = async () => {
                         });
                         revalidatePath("/");
                       }}
+                      className="w-full"
                     >
-                      <Button type="submit" variant="destructive">
+                      <Button
+                        type="submit"
+                        variant="destructive"
+                        className="w-full"
+                      >
                         Log out
                       </Button>
                     </form>
