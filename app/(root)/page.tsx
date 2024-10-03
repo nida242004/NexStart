@@ -8,7 +8,7 @@ import { IDEAS_QUERY, SEARCH_QUERY } from "@/sanity/lib/queries";
 async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [searchParams: string]: string }>;
 }) {
   const query = (await searchParams).query as string;
 
@@ -37,7 +37,9 @@ async function Home({
       </section>
 
       <section className="section_container">
-        <p className="text-30-semibold">Explore Startups</p>
+        <p className="text-30-semibold">
+          {query ? `Search results for "${query}"` : "All Startups"}
+        </p>
 
         <ul className="mt-7 card_grid">
           {posts?.length > 0 ? (
