@@ -85,7 +85,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 }`);
 
 export const STARTUPS_BY_AUTHOR_QUERY =
-  defineQuery(`*[_type == "startup" && author._ref == $id]{
+  defineQuery(`*[_type == "startup" && author._ref == $id] | order(_createdAt desc){
   _id, 
   title, 
   slug, 

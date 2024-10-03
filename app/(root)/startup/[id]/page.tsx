@@ -39,7 +39,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         <p className="tag">{formatDate(post._createdAt)}</p>
 
         <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading">{post.description}</p>
+        <p className="sub-heading max-w-5xl">{post.description}</p>
       </section>
 
       <section className="section_container">
@@ -70,7 +70,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
         <hr className="divider" />
 
-        {editorPosts.length > 0 && (
+        {editorPosts?.length > 0 && (
           <div className="max-w-4xl mx-auto">
             <p className="text-30-semibold">Editor Picks</p>
 
