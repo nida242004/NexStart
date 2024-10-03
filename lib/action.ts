@@ -5,7 +5,7 @@ import slugify from "slugify";
 
 import { client } from "@/sanity/lib/client";
 import { server } from "@/sanity/lib/server";
-import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 
 export const createIdea = async (state: any, form: FormData, pitch: string) => {
   const session = await auth();
@@ -27,7 +27,7 @@ export const createIdea = async (state: any, form: FormData, pitch: string) => {
   };
 
   try {
-    const authorRefId = await client.fetch(AUTHOR_BY_ID_QUERY, {
+    const authorRefId = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
       // @ts-ignore
       id: session?.id,
     });
