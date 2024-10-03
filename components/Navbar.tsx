@@ -29,10 +29,7 @@ const Navbar = async () => {
             <>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="p-0 focus-visible:ring-0 !bg-none rounded-full drop-shadow-md"
-                  >
+                  <Button variant="ghost" className="avatar">
                     <Avatar className="size-10">
                       <AvatarImage
                         src={session?.user?.image || ""}
@@ -42,10 +39,7 @@ const Navbar = async () => {
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="w-56 border-[5px] border-black bg-white p-5 !rounded-2xl"
-                >
+                <DropdownMenuContent align="end" className="dropdown-menu">
                   <DropdownMenuItem className="font-bold uppercase focus:bg-white">
                     {session?.user?.name}
                   </DropdownMenuItem>
@@ -86,11 +80,8 @@ const Navbar = async () => {
                 await signIn("github");
               }}
             >
-              <Button
-                type="submit"
-                className="border-[5px] py-4 border-black !bg-white text-black relative shadow-100 font-work-sans font-medium hover:shadow-none transition-all duration-500"
-              >
-                <Github className="w-5 h-5 mr-2" />
+              <Button type="submit" className="login">
+                <Github className="size-5 mr-2" />
                 Login
               </Button>
             </form>

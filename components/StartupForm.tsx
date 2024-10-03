@@ -58,95 +58,75 @@ const StartupForm = () => {
   }
 
   return (
-    <form
-      action={formAction}
-      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6"
-    >
+    <form action={formAction} className="startup-form">
       <div>
-        <label
-          htmlFor="title"
-          className="font-bold text-[18px] text-black uppercase"
-        >
+        <label htmlFor="title" className="startup-form_label">
           Title
         </label>
         <Input
           id="title"
           name="title"
-          className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
+          className="startup-form_input"
           required
           placeholder="JSM Academy Masterclasss"
         />
 
-        {errors.title && (
-          <p className="text-red-500 mt-2 ml-5">{errors.title}</p>
-        )}
+        {errors.title && <p className="startup-form_error">{errors.title}</p>}
       </div>
 
       <div>
-        <label
-          htmlFor="description"
-          className="font-bold text-[18px] text-black uppercase"
-        >
+        <label htmlFor="description" className="startup-form_label">
           Description
         </label>
         <Textarea
           id="description"
           name="description"
-          className="border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300"
+          className="startup-form_input"
           rows={5}
           required
           placeholder="Short description of your startup idea"
         />
 
         {errors.description && (
-          <p className="text-red-500 mt-1 ml-5">{errors.description}</p>
+          <p className="startup-form_error">{errors.description}</p>
         )}
       </div>
 
       <div>
-        <label
-          htmlFor="category"
-          className="font-bold text-[18px] text-black uppercase"
-        >
+        <label htmlFor="category" className="startup-form_label">
           Category
         </label>
         <Input
           id="category"
           name="category"
           required
-          className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
+          className="startup-form_input"
           placeholder="Choose a category (e.g., Tech, Health, Education, etc.)"
         />
 
         {errors.category && (
-          <p className="text-red-500 mt-1 ml-5">{errors.category}</p>
+          <p className="startup-form_error">{errors.category}</p>
         )}
       </div>
 
       <div>
-        <label
-          htmlFor="link"
-          className="font-bold text-[18px] text-black uppercase"
-        >
+        <label htmlFor="link" className="startup-form_label">
           Image link
         </label>
         <Input
           id="link"
           name="link"
           type="url"
-          className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
+          className="startup-form_input"
           required
           placeholder="Paste a link to your demo or promotional media"
         />
 
-        {errors.link && <p className="text-red-500 mt-1 ml-5">{errors.link}</p>}
+        {errors.link && <p className="startup-form_error">{errors.link}</p>}
       </div>
 
       <div data-color-mode="light">
-        <label
-          htmlFor="pitch"
-          className="font-bold text-[18px] text-black uppercase"
-        >
+        <label htmlFor="pitch" className="startup-form_label">
           Pitch
         </label>
 
@@ -156,7 +136,7 @@ const StartupForm = () => {
           preview="edit"
           height={300}
           onChange={(value) => setPitch(value as string)}
-          className="mt-3 border-[3px] border-black text-[18px] text-black font-semibold placeholder:text-black-300"
+          className="startup-form_editor"
           style={{
             borderRadius: 20,
             overflow: "hidden",
@@ -170,17 +150,11 @@ const StartupForm = () => {
           }}
         />
 
-        {errors.pitch && (
-          <p className="text-red-500 mt-1 ml-5">{errors.pitch}</p>
-        )}
+        {errors.pitch && <p className="startup-form_error">{errors.pitch}</p>}
       </div>
 
-      <Button
-        type="submit"
-        disabled={isPending}
-        className="bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px]"
-      >
-        <ExternalLink className="w-6 h-6 mr-2" />
+      <Button type="submit" disabled={isPending} className="startup-form_btn">
+        <ExternalLink className="size-6 mr-2" />
         {isPending ? "Submitting..." : "Submit Your Pitch"}
       </Button>
     </form>

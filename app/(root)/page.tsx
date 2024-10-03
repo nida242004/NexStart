@@ -45,7 +45,7 @@ async function Home({
               <StartupCard key={index} post={post} />
             ))
           ) : (
-            <p className="no-results">No results found</p>
+            <p className="no-result">No results found</p>
           )}
         </ul>
       </section>

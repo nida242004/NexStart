@@ -21,11 +21,12 @@ const View = async ({ id }: { id: string }) => {
   });
 
   return (
-    <div className="flex justify-end items-center mt-5 fixed bottom-3 right-3">
+    <div className="view-container">
       <div className="absolute -top-2 -right-2">
         <Ping />
       </div>
-      <p className="font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize">
+
+      <p className="view-text">
         <span className="font-black">{formatNumber(totalViews + 1)}</span> views
       </p>
     </div>

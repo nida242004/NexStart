@@ -61,7 +61,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
-            <p className="no-results">No details provided</p>
+            <p className="no-result">No details provided</p>
           )}
         </div>
 

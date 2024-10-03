@@ -11,24 +11,18 @@ export type StartupIdeaType = Omit<Idea, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: StartupIdeaType }) => {
   return (
-    <li className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200">
-      <div className="flex justify-between items-center">
-        <p className="font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full">
-          {formatDate(post._createdAt)}
-        </p>
-        <Bookmark className="size-[23px] text-black" />
+    <li className="startup-card">
+      <div className="flex-between">
+        <p className="startup-card_date">{formatDate(post._createdAt)}</p>
+        <Bookmark className="size-6 text-black" />
       </div>
 
-      <div className="flex justify-between items-center mt-5 gap-5">
+      <div className="flex-between mt-5 gap-5">
         <div className="flex-1">
           <Link href={`/user/${post.author?._id!}`}>
-            <p className="font-medium text-[16px] line-clamp-1">
-              {post.author?.name}
-            </p>
+            <p className="text-16-medium line-clamp-1">{post.author?.name}</p>
           </Link>
-          <h3 className="font-semibold text-[26px] line-clamp-1">
-            {post.title}
-          </h3>
+          <h3 className="text-26-semibold line-clamp-1">{post.title}</h3>
         </div>
         <Link href={`/user/${post.author?._id}`}>
           <img
@@ -39,22 +33,13 @@ const StartupCard = ({ post }: { post: StartupIdeaType }) => {
         </Link>
       </div>
 
-      <p className="font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all">
-        {post.description}
-      </p>
+      <p className="startup-card_desc">{post.description}</p>
 
-      <img
-        src={post.image}
-        alt="placeholder"
-        className="w-full h-[164px] rounded-[10px] object-cover"
-      />
+      <img src={post.image} alt="placeholder" className="startup-card_img" />
 
-      <div className="flex justify-between items-center gap-3 mt-5">
-        <p className="font-medium text-[16px]">{post.category}</p>
-        <Button
-          className="rounded-full !bg-black-200 font-medium text-[16px] text-white px-5 py-3"
-          asChild
-        >
+      <div className="flex-between gap-3 mt-5">
+        <p className="text-16-medium">{post.category}</p>
+        <Button className="startup-card_btn" asChild>
           <Link href={`/idea/${post._id}`}>Details</Link>
         </Button>
       </div>
@@ -66,7 +51,7 @@ export const StartupCardSkeleton = () => (
   <>
     {[0, 1, 2, 3, 4].map((_, index: number) => (
       <li key={cn("skeleton", index)}>
-        <Skeleton className="w-full h-96 rounded-[22px] bg-zinc-400" />
+        <Skeleton className="startup-card_skeleton" />
       </li>
     ))}
   </>
