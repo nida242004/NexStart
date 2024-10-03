@@ -34,7 +34,7 @@ export const createIdea = async (state: any, form: FormData, pitch: string) => {
       pitch,
     };
 
-    const result = await server.create({ _type: "idea", ...idea });
+    const result = await server.create({ _type: "startup", ...idea });
 
     return parseServerActionResponse({
       ...result,
