@@ -18,19 +18,23 @@ const StartupCard = ({ post }) => {
 
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          <p className="font-medium text-[16px] line-clamp-1">
-            {post.author.name}
-          </p>
+          <Link href={`/user/${post.author._id}`}>
+            <p className="font-medium text-[16px] line-clamp-1">
+              {post.author.name}
+            </p>
+          </Link>
           <h3 className="font-semibold text-[26px] line-clamp-1">
             {post.title}
           </h3>
         </div>
 
-        <img
-          src={post.author.image}
-          alt="placeholder"
-          className="size-12 rounded-full"
-        />
+        <Link href={`/user/${post.author._id}`}>
+          <img
+            src={post.author.image}
+            alt="placeholder"
+            className="size-12 rounded-full"
+          />
+        </Link>
       </div>
 
       <p className="font-normal text-[16px] line-clamp-2 my-3 text-black-100">
