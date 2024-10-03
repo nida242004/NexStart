@@ -3,9 +3,9 @@ import type { StructureResolver } from "sanity/structure";
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title("Startups")
+    .title("Content")
     .items([
-      S.documentTypeListItem("idea").title("Ideas"),
+      S.documentTypeListItem("startup").title("Startups"),
       S.documentTypeListItem("author").title("Authors"),
       S.documentTypeListItem("playlist").title("Playlists"),
     ]);

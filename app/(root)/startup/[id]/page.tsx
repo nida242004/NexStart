@@ -5,12 +5,15 @@ import { notFound } from "next/navigation";
 
 import { formatDate } from "@/lib/utils";
 
+import {
+  STARTUP_BY_ID_QUERY,
+  PLAYLIST_BY_SLUG_QUERY,
+} from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
-import { IDEA_BY_ID_QUERY, PLAYLIST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 
 import View from "@/components/View";
 import { Skeleton } from "@/components/ui/skeleton";
-import StartupCard, { StartupIdeaType } from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
 const md = markdownit();
 export const experimental_ppr = true;
@@ -19,7 +22,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
 
   const [post, { select: editorPosts }] = await Promise.all([
-    client.fetch(IDEA_BY_ID_QUERY, {
+    client.fetch(STARTUP_BY_ID_QUERY, {
       id: id,
     }),
     client.fetch(PLAYLIST_BY_SLUG_QUERY, {
@@ -72,7 +75,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             <p className="text-30-semibold">Editor Picks</p>
 
             <ul className="mt-7 card_grid-sm">
-              {editorPosts.map((post: StartupIdeaType, index: number) => (
+              {editorPosts.map((post: StartupCardType, index: number) => (
                 <StartupCard key={index} post={post} />
               ))}
             </ul>

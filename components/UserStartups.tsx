@@ -1,15 +1,15 @@
 import { client } from "@/sanity/lib/client";
-import { IDEAS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
+import { STARTUPS_BY_AUTHOR_QUERY } from "@/sanity/lib/queries";
 
-import StartupCard, { StartupIdeaType } from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
 const UserStartups = async ({ id }: { id: string }) => {
-  const posts = await client.fetch(IDEAS_BY_AUTHOR_QUERY, { id: id });
+  const posts = await client.fetch(STARTUPS_BY_AUTHOR_QUERY, { id: id });
 
   return (
     <>
       {posts.length > 0 ? (
-        posts.map((post: StartupIdeaType) => (
+        posts.map((post: StartupCardType) => (
           <StartupCard key={post._id} post={post} />
         ))
       ) : (

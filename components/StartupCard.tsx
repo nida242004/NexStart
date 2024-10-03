@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
-import { Author, Idea } from "@/sanity/types";
+import { Author, Startup } from "@/sanity/types";
 import { cn, formatDate } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export type StartupIdeaType = Omit<Idea, "author"> & { author?: Author };
+export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
-const StartupCard = ({ post }: { post: StartupIdeaType }) => {
+const StartupCard = ({ post }: { post: StartupCardType }) => {
   return (
     <li className="startup-card">
       <div className="flex-between">
@@ -42,7 +42,7 @@ const StartupCard = ({ post }: { post: StartupIdeaType }) => {
           <p className="text-16-medium">{post.category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
-          <Link href={`/idea/${post._id}`}>Details</Link>
+          <Link href={`/startup/${post._id}`}>Details</Link>
         </Button>
       </div>
     </li>
