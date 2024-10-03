@@ -32,20 +32,14 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
   return (
     <>
-      <section className="w-full bg-primary min-h-[230px] pattern flex justify-center items-center flex-col py-10 px-6">
-        <p className="bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative before-tri after-tri">
-          {formatDate(post._createdAt)}
-        </p>
+      <section className="pink_container min-h-[230px]">
+        <p className="tag">{formatDate(post._createdAt)}</p>
 
-        <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-bold text-white sm:text-[54px] text-[36px] max-w-5xl text-center my-5">
-          {post.title}
-        </h1>
-        <p className="font-medium text-[20px] text-white max-w-2xl text-center break-all">
-          {post.description}
-        </p>
+        <h1 className="heading">{post.title}</h1>
+        <p className="sub-heading">{post.description}</p>
       </section>
 
-      <section className="py-10 px-6 max-w-7xl mx-auto">
+      <section className="section_container">
         <img
           src={post.image}
           alt="image"
@@ -60,25 +54,24 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               className="size-16 rounded-full mb-3"
             />
           </Link>
-          <h3 className="font-bold text-[30px]">Pitch Details</h3>
+          <h3 className="text-30-bold">Pitch Details</h3>
           {parsedContent ? (
             <article
               className="prose max-w-4xl font-work-sans break-all"
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (
-            <p className="tex-sm font-normal text-black-100">
-              No details provided
-            </p>
+            <p className="no-results">No details provided</p>
           )}
         </div>
-        <hr className="border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto" />
+
+        <hr className="divider" />
 
         {editorPosts.length > 0 && (
           <div className="max-w-4xl mx-auto">
-            <p className="font-semibold text-[30px] text-black">Editor Picks</p>
+            <p className="text-30-semibold">Editor Picks</p>
 
-            <ul className="mt-7 grid sm:grid-cols-2 gap-5">
+            <ul className="mt-7 card_grid-sm">
               {editorPosts.map((post: StartupIdeaType, index: number) => (
                 <StartupCard key={index} post={post} />
               ))}
@@ -87,11 +80,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         )}
       </section>
 
-      <Suspense
-        fallback={
-          <Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />
-        }
-      >
+      <Suspense fallback={<Skeleton className="view_skeleton" />}>
         <View id={id} />
       </Suspense>
     </>
