@@ -1,5 +1,11 @@
-import Explore from "@/components/Explore";
+import { Idea } from "@/sanity/types";
+
 import SearchForm from "@/components/SearchForm";
+import StartupCard from "@/components/StartupCard";
+
+import { client } from "@/sanity/lib/client";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { IDEAS_QUERY, SEARCH_QUERY } from "@/sanity/lib/queries";
 
 async function Home({
   searchParams,
@@ -7,6 +13,14 @@ async function Home({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const query = (await searchParams).query as string;
+
+  let posts;
+  if (query) {
+    posts = await client.fetch(SEARCH_QUERY, { search: query.toLowerCase() });
+  } else {
+    const result = await sanityFetch({ query: IDEAS_QUERY });
+    posts = result.data;
+  }
 
   return (
     <>
@@ -29,8 +43,18 @@ async function Home({
       <section className="px-5 py-10 max-w-7xl mx-auto">
         <p className="font-semibold text-[30px] text-black">Explore Startups</p>
 
-        <Explore query={query} />
+        <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
+          {posts?.length > 0 ? (
+            posts.map((post: Idea, index: number) => (
+              <StartupCard key={index} post={post} />
+            ))
+          ) : (
+            <p className="text-black-100 text-sm">No results found</p>
+          )}
+        </ul>
       </section>
+
+      <SanityLive />
     </>
   );
 }

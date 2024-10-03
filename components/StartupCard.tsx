@@ -64,7 +64,7 @@ const StartupCard = ({ post }: { post: Idea }) => {
   );
 };
 
-export const Fallback = () => (
+export const StartupCardSkeleton = () => (
   <>
     {[0, 1, 2, 3, 4].map((_, index: number) => (
       <li key={cn("skeleton", index)} className="h-full">
