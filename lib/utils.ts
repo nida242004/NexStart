@@ -5,11 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// write a function that takes this as input: 2024-10-02T09:44:47Z and returns in this format: October 10, 2024
 export function formatDate(date: string) {
   return new Date(date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
+}
+
+export function formatNumber(number: number) {
+  if (number >= 1000000) {
+    return (number / 1000000).toFixed(1).replace(/\.0$/, "") + "M"; // Convert to millions
+  } else if (number >= 1000) {
+    return (number / 1000).toFixed(1).replace(/\.0$/, "") + "k"; // Convert to thousands
+  } else {
+    return number.toString(); // Return the number as is if below 1000
+  }
 }

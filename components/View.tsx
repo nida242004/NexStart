@@ -4,6 +4,7 @@ import Ping from "@/components/Ping";
 import { server } from "@/sanity/lib/server";
 import { client } from "@/sanity/lib/client";
 import { IDEA_VIEWS_QUERY } from "@/sanity/lib/queries";
+import { formatNumber } from "@/lib/utils";
 
 const View = async ({ id }: { id: string }) => {
   const { views: totalViews } = await client
@@ -25,7 +26,7 @@ const View = async ({ id }: { id: string }) => {
         <Ping />
       </div>
       <p className="font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize">
-        <span className="font-black">{totalViews + 1}</span> views
+        <span className="font-black">{formatNumber(totalViews + 1)}</span> views
       </p>
     </div>
   );
