@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
@@ -28,7 +29,13 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             </h3>
           </div>
 
-          <img src={user.image} alt="user_image" className="profile_image" />
+          <Image
+            src={user.image}
+            alt="user_image"
+            width={220}
+            height={220}
+            className="profile_image"
+          />
 
           <p className="text-30-extrabold mt-7 text-center">
             @{user?.username}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import markdownit from "markdown-it";
 import { notFound } from "next/navigation";
@@ -51,10 +52,12 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
           <Link href={`/user/${post.author?._id}`}>
-            <img
+            <Image
               src={post.author.image}
               alt="image"
-              className="size-16 rounded-full mb-3"
+              width={64}
+              height={64}
+              className="rounded-full mb-3"
             />
           </Link>
           <h3 className="text-30-bold">Pitch Details</h3>

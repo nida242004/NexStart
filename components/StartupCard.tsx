@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Bookmark } from "lucide-react";
 
 import { Author, Startup } from "@/sanity/types";
@@ -25,10 +26,12 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
           <h3 className="text-26-semibold line-clamp-1">{post.title}</h3>
         </div>
         <Link href={`/user/${post.author?._id}`}>
-          <img
-            src={post.author?.image}
+          <Image
+            src={post.author?.image!}
             alt="placeholder"
-            className="size-12 rounded-full"
+            width={48}
+            height={48}
+            className="rounded-full"
           />
         </Link>
       </div>

@@ -88,7 +88,7 @@
   }
 
   .profile_image {
-    @apply size-[220px] rounded-full object-cover border-[3px] border-black;
+    @apply rounded-full object-cover border-[3px] border-black;
   }
 
   /* idea details */
