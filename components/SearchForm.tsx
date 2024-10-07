@@ -1,8 +1,8 @@
 import Form from "next/form";
-import Link from "next/link";
-import { X, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import SearchFormReset from "@/components/SearchFormReset";
 
 const SearchForm = ({ query }: { query?: string }) => {
   return (
@@ -15,17 +15,11 @@ const SearchForm = ({ query }: { query?: string }) => {
       />
 
       <div className="flex gap-2">
-        {query && (
-          <Button type="reset" asChild>
-            <Link href="/" className="search-btn">
-              <X className="size-5 text-white" />
-            </Link>
-          </Button>
-        )}
+        {query && <SearchFormReset />}
 
-        <button type="submit" className="search-btn">
+        <Button type="submit" className="search-btn">
           <Search className="size-5 text-white" />
-        </button>
+        </Button>
       </div>
     </Form>
   );
