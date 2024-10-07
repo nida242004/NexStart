@@ -40,7 +40,7 @@ If you prefer visual learning, this is the perfect resource for you. Follow our 
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Built with React.js for handling the user interface, Three.js for rendering 3D elements, and styled with TailwindCSS, 3D Island is a website project. The primary goal is to demonstrate the developer's skills in a unique manner that creates a lasting impact.
+A Next.js 15 platform where entrepreneurs can submit their startup ideas for virtual pitch competitions, browse other pitches, and gain exposure through a clean minimalistic design for a smooth user experience.
 
 If you're getting started and need assistance or face any bugs, join our active Discord community with over **34k+** members. It's a place where people help each other out.
 
@@ -57,21 +57,27 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 ## <a name="features">🔋 Features</a>
 
-👉 **Point**: Short Description
+👉 **Live Content API**: Displays the latest startup ideas dynamically on the homepage using Sanity's Content API.
 
-👉 **Point**: Short Description
+👉 **GitHub Authentication**: Allows users to log in easily using their GitHub account.
 
-👉 **Point**: Short Description
+👉 **Pitch Submission**: Users can submit startup ideas, including title, description, category, and multimedia links (image or video).
 
-👉 **Point**: Short Description
+👉 **View Pitches**: Browse through submitted ideas with filtering options by category.
 
-👉 **Point**: Short Description
+👉 **Pitch Details Page**: Click on any pitch to view its details, with multimedia and description displayed.
 
-👉 **Point**: Short Description
+👉 **Profile Page**: Users can view the list of pitches they've submitted.
 
-👉 **Point**: Short Description
+👉 **Editor Picks**: Admins can highlight top startup ideas using the "Editor Picks" feature managed via Sanity Studio.
 
-and many more, including code architecture and reusability 
+👉 **Views Counter**: Tracks the number of views for each pitch instead of an upvote system.
+
+👉 **Search**: Search functionality to load and view pitches efficiently.
+
+👉 **Minimalistic Design**: Fresh and simple UI with only the essential pages for ease of use and a clean aesthetic.
+
+and many more, including the latest **React 19**, **Next.js 15** and **Sanity** features alongside code architecture and reusability 
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
