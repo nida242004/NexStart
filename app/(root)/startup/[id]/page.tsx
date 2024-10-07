@@ -34,13 +34,15 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   if (!post) return notFound();
   const parsedContent = md.render(post?.pitch || "");
 
+  console.log({ post });
+
   return (
     <>
-      <section className="pink_container min-h-[230px]">
+      <section className="pink_container !min-h-[230px]">
         <p className="tag">{formatDate(post._createdAt)}</p>
 
         <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading max-w-5xl">{post.description}</p>
+        <p className="sub-heading !max-w-5xl">{post.description}</p>
       </section>
 
       <section className="section_container">
@@ -51,15 +53,30 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         />
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
-          <Link href={`/user/${post.author?._id}`}>
-            <Image
-              src={post.author.image}
-              alt="image"
-              width={64}
-              height={64}
-              className="rounded-full mb-3"
-            />
-          </Link>
+          <div className="flex-between gap-5">
+            <Link
+              href={`/user/${post.author?._id}`}
+              className="flex gap-2 items-center mb-3"
+            >
+              <Image
+                src={post.author.image}
+                alt="image"
+                width={64}
+                height={64}
+                className="rounded-full drop-shadow-lg"
+              />
+
+              <div>
+                <p className="text-20-medium">{post.author.name}</p>
+                <p className="text-16-medium !text-black-300">
+                  @{post.author.username}
+                </p>
+              </div>
+            </Link>
+
+            <p className="category-tag">{post.category}</p>
+          </div>
+
           <h3 className="text-30-bold">Pitch Details</h3>
           {parsedContent ? (
             <article

@@ -8,8 +8,9 @@
   :root {
     --radius: 0.5rem;
   }
+}
 
-  /* common */
+@layer utilities {
   .flex-between {
     @apply flex justify-between items-center;
   }
@@ -34,6 +35,10 @@
     @apply text-[24px] font-black text-black;
   }
 
+  .text-20-medium {
+    @apply font-medium text-[20px] text-black;
+  }
+
   .text-16-medium {
     @apply font-medium text-[16px] text-black;
   }
@@ -51,7 +56,7 @@
   }
 
   .heading {
-    @apply uppercase bg-black px-6 py-3 font-work-sans font-bold text-white sm:text-[54px] text-[36px] max-w-5xl text-center my-5;
+    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .sub-heading {
@@ -119,11 +124,11 @@
   }
 
   .search-input {
-    @apply flex-1 placeholder:font-bold placeholder:text-black w-full h-auto outline-none;
+    @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none;
   }
 
   .search-btn {
-    @apply size-[50px] rounded-full bg-black flex justify-center items-center;
+    @apply size-[50px] rounded-full bg-black flex justify-center items-center !important;
   }
 
   /* startupcard */
@@ -187,6 +192,10 @@
 
   .view-text {
     @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize;
+  }
+
+  .category-tag {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full;
   }
 
   .pattern {

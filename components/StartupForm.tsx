@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { redirect } from "next/navigation";
 import MDEditor from "@uiw/react-md-editor";
-import { ExternalLink } from "lucide-react";
+import { Send } from "lucide-react";
 import { useState, useActionState } from "react";
 
 import { createIdea } from "@/lib/action";
@@ -154,8 +154,8 @@ const StartupForm = () => {
       </div>
 
       <Button type="submit" disabled={isPending} className="startup-form_btn">
-        <ExternalLink className="size-6 mr-2" />
         {isPending ? "Submitting..." : "Submit Your Pitch"}
+        <Send className="size-6 ml-2" />
       </Button>
     </form>
   );

@@ -5,6 +5,8 @@ import { client } from "@/sanity/lib/client";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { SEARCH_QUERY, STARTUPS_QUERY } from "@/sanity/lib/queries";
 
+export const revalidate = 0;
+
 async function Home({
   searchParams,
 }: {
@@ -33,7 +35,7 @@ async function Home({
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
         </p>
 
-        <SearchForm />
+        <SearchForm query={query} />
       </section>
 
       <section className="section_container">
