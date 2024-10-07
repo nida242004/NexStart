@@ -1,16 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Github } from "lucide-react";
-import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "@/auth";
+import { Github, BadgePlus, LogOut } from "lucide-react";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -27,51 +19,38 @@ const Navbar = async () => {
         <div className="flex items-center gap-5">
           {session && session?.user ? (
             <>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="avatar">
-                    <Avatar className="size-10">
-                      <AvatarImage
-                        src={session?.user?.image || ""}
-                        alt={session?.user?.name || ""}
-                      />
-                      <AvatarFallback>UN</AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="dropdown-menu">
-                  <DropdownMenuItem className="font-bold uppercase focus:bg-white">
-                    {session?.user?.name}
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="my-5" />
-                  <DropdownMenuItem asChild>
-                    <Link href={`/user/${session?.id}`}>My Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/startup/create">Submit Proposal</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-red-600 font-bold mt-5">
-                    <form
-                      action={async () => {
-                        "use server";
-                        await signOut({
-                          redirectTo: "/",
-                        });
-                        revalidatePath("/");
-                      }}
-                      className="w-full"
-                    >
-                      <Button
-                        type="submit"
-                        variant="destructive"
-                        className="w-full"
-                      >
-                        Log out
-                      </Button>
-                    </form>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <Link
+                href="/startup/create"
+                className="font-semibold text-black-100"
+              >
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden" />
+              </Link>
+
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut({
+                    redirectTo: "/",
+                  });
+                }}
+                className="font-semibold text-red-500 cursor-pointer"
+              >
+                <button type="submit">
+                  <span className="max-sm:hidden">Logout</span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
+                </button>
+              </form>
+
+              <Link href={`/user/${session?.id}`} className="avatar">
+                <Avatar className="size-10">
+                  <AvatarImage
+                    src={session?.user?.image || ""}
+                    alt={session?.user?.name || ""}
+                  />
+                  <AvatarFallback>UN</AvatarFallback>
+                </Avatar>
+              </Link>
             </>
           ) : (
             <form

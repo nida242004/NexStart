@@ -34,8 +34,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   if (!post) return notFound();
   const parsedContent = md.render(post?.pitch || "");
 
-  console.log({ post });
-
   return (
     <>
       <section className="pink_container !min-h-[230px]">

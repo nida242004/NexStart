@@ -2,10 +2,8 @@ import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
 import { client } from "@/sanity/lib/client";
-import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/live";
 import { SEARCH_QUERY, STARTUPS_QUERY } from "@/sanity/lib/queries";
-
-export const revalidate = 0;
 
 async function Home({
   searchParams,
@@ -53,8 +51,6 @@ async function Home({
           )}
         </ul>
       </section>
-
-      <SanityLive />
     </>
   );
 }
