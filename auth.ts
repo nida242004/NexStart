@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
 import { client } from "./sanity/lib/client";
-import { server } from "@/sanity/lib/server";
+import { writeClient } from "@/sanity/lib/write-client";
 import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -18,7 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       if (!existingUser) {
         // User not found in Sanity, create a new user document
-        await server.create({
+        await writeClient.create({
           _type: "author",
           id: profile?.id,
           name: user?.name,

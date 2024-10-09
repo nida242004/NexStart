@@ -3,19 +3,19 @@ import { unstable_after as after } from "next/server";
 import Ping from "@/components/Ping";
 import { formatNumber } from "@/lib/utils";
 
-import { server } from "@/sanity/lib/server";
 import { client } from "@/sanity/lib/client";
+import { writeClient } from "@/sanity/lib/write-client";
 import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries";
 
 const View = async ({ id }: { id: string }) => {
   const { views: totalViews } = await client
-    // .withConfig({ useCdn: false })
+    .withConfig({ useCdn: false })
     .fetch(STARTUP_VIEWS_QUERY, {
       id: id,
     });
 
   after(async () => {
-    await server
+    await writeClient
       .patch(id)
       .set({ views: totalViews + 1 })
       .commit();

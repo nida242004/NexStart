@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import slugify from "slugify";
 
-import { server } from "@/sanity/lib/server";
+import { writeClient } from "@/sanity/lib/write-client";
 import { parseServerActionResponse } from "@/lib/utils";
 
 export const createIdea = async (state: any, form: FormData, pitch: string) => {
@@ -34,7 +34,7 @@ export const createIdea = async (state: any, form: FormData, pitch: string) => {
       pitch,
     };
 
-    const result = await server.create({ _type: "startup", ...idea });
+    const result = await writeClient.create({ _type: "startup", ...idea });
 
     return parseServerActionResponse({
       ...result,
