@@ -18,6 +18,7 @@ import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
 const md = markdownit();
 export const experimental_ppr = true;
+export const revalidate = 0;
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id;
