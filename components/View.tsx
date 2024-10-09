@@ -9,7 +9,7 @@ import { STARTUP_VIEWS_QUERY } from "@/sanity/lib/queries";
 
 const View = async ({ id }: { id: string }) => {
   const { views: totalViews } = await client
-    .withConfig({ useCdn: false })
+    // .withConfig({ useCdn: false })
     .fetch(STARTUP_VIEWS_QUERY, {
       id: id,
     });
