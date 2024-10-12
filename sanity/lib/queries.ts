@@ -104,24 +104,6 @@ export const STARTUPS_BY_AUTHOR_QUERY =
   image, 
 }`);
 
-export const SEARCH_QUERY = defineQuery(
-  `*[_type == "startup" && (title match $search || category match $search || author->name match $search)][0...12]{
-  _id, 
-  title, 
-  slug, 
-  _createdAt,
-  author->{
-    _id,
-    name,
-    slug,
-    image,
-  }, 
-  description, 
-  category, 
-  image, 
-}`,
-);
-
 export const STARTUP_VIEWS_QUERY =
   defineQuery(`*[_type == "startup" && _id == $id][0]{
   _id,
