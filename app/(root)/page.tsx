@@ -1,8 +1,8 @@
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 
-import { sanityFetch } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 async function Home({
   searchParams,
@@ -45,6 +45,8 @@ async function Home({
           )}
         </ul>
       </section>
+
+      <SanityLive />
     </>
   );
 }
