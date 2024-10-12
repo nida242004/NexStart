@@ -7,9 +7,9 @@ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ [searchParams: string]: string }>;
+  searchParams: Promise<{ query?: string }>;
 }) {
-  const query = (await searchParams).query as string;
+  const query = (await searchParams).query;
 
   const params = { search: query || null };
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
