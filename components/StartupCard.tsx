@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Bookmark } from "lucide-react";
+import { Bookmark, EyeIcon } from "lucide-react";
 
 import { Author, Startup } from "@/sanity/types";
-import { cn, formatDate } from "@/lib/utils";
+import { cn, formatDate, formatNumber } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,10 +12,13 @@ export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
 const StartupCard = ({ post }: { post: StartupCardType }) => {
   return (
-    <li className="startup-card">
+    <li className="startup-card group">
       <div className="flex-between">
         <p className="startup-card_date">{formatDate(post._createdAt)}</p>
-        <Bookmark className="size-6 text-black" />
+        <div className="flex gap-1.5">
+          <EyeIcon className="size-6 text-primary" />
+          <span className="text-16-medium">{formatNumber(post.views!)}</span>
+        </div>
       </div>
 
       <div className="flex-between mt-5 gap-5">

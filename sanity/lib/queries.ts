@@ -15,6 +15,7 @@ export const STARTUPS_QUERY =
       image,
       bio
     }, 
+    views,
     description, 
     category, 
     image, 
@@ -79,6 +80,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
       image,
       bio
     },
+    views,
     description,
     category,
     image,
@@ -99,6 +101,7 @@ export const STARTUPS_BY_AUTHOR_QUERY =
     slug,
     image,
   }, 
+  views,
   description, 
   category, 
   image, 
