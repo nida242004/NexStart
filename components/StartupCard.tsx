@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Bookmark, EyeIcon } from "lucide-react";
+import { EyeIcon } from "lucide-react";
 
 import { Author, Startup } from "@/sanity/types";
 import { cn, formatDate, formatNumber } from "@/lib/utils";
