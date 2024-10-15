@@ -521,6 +521,36 @@ export default Ping;
 
 </details>
 
+<details>
+    <summary><code>PLAYLIST_BY_SLUG_QUERY</code></summary>
+
+```typescript
+export const PLAYLIST_BY_SLUG_QUERY =
+  defineQuery(`*[_type == "playlist" && slug.current == $slug][0]{
+  _id,
+  title,
+  slug,
+  select[]->{
+    _id,
+    _createdAt,
+    title,
+    slug,
+    author->{
+      _id,
+      name,
+      slug,
+      image,
+      bio
+    },
+    views,
+    description,
+    category,
+    image,
+    pitch
+  }
+}`);
+```
+
 ## <a name="links">🔗 Assets</a>
 
 Fonts and Assets used in the project can be
