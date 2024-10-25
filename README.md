@@ -566,8 +566,9 @@ export const PLAYLIST_BY_SLUG_QUERY =
 Enjoyed creating this project? Dive deeper into our PRO courses for a richer learning adventure. They're packed with
 detailed explanations, cool features, and exercises to boost your skills. Give it a go!
 
-<a href="https://jsmastery.pro/next14" target="_blank">
-<img src="https://github.com/sujatagunale/EasyRead/assets/151519281/557837ce-f612-4530-ab24-189e75133c71" alt="Project Banner">
+<a href="https://jsmastery.pro/next15" target="_blank">
+   <img src="https://github.com/user-attachments/assets/b8760e69-1f81-4a71-9108-ceeb1de36741" alt="Project Banner">
 </a>
 
 #
+
