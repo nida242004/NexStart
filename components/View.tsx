@@ -1,4 +1,4 @@
-import { unstable_after as after } from "next/server";
+import { after } from "next/server";
 
 import Ping from "@/components/Ping";
 import { formatNumber } from "@/lib/utils";

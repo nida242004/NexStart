@@ -36,7 +36,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
             alt="placeholder"
             width={48}
             height={48}
-            className="rounded-full"
+            className="rounded-full aspect-square object-cover"
           />
         </Link>
       </div>
