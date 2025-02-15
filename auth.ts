@@ -1,12 +1,15 @@
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
+import GitHubProvider from "next-auth/providers/github";
 
 import { client } from "./sanity/lib/client";
 import { writeClient } from "@/sanity/lib/write-client";
 import { AUTHOR_BY_GITHUB_ID_QUERY } from "@/sanity/lib/queries";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [GitHub],
+  providers: [GitHubProvider({
+    clientId: process.env.AUTH_GITHUB_ID,
+    clientSecret: process.env.AUTH_GITHUB_SECRET,
+  })],
   callbacks: {
     async signIn({ user, account, profile }) {
       // Check if the user exists in Sanity
@@ -41,7 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
 
         // Extend the token with the GitHub profile id
-        token.id = user._id;
+        token.id = user._id || profile.id;
       }
       return token;
     },
@@ -52,4 +55,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
+  secret: process.env.AUTH_SECRET,
+  debug: true,
 });
