@@ -7,29 +7,31 @@ import { writeClient } from "@/sanity/lib/write-client";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
   callbacks: {
+    
     async signIn({ user, profile }) {
-      const id = profile?.id;
-      const login = profile?.login || "unknown_user";
-      const bio = profile?.bio || "";
+      if (!profile?.id) return false; // Prevents invalid sign-ins
     
-      if (!id) return false; // Prevent sign-in if ID is missing
-    
-      const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id });
+      // Fetch the user from Sanity
+      const existingUser = await client.fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+        id: profile.id,
+      });
     
       if (!existingUser) {
-        await writeClient.create({
+        // Create a new user **only if they don’t exist**
+        await writeClient.createIfNotExists({
           _type: "author",
-          _id: `github-${id}`,
-          name: user?.name || "Unknown",
-          username: login,
-          email: user?.email || "",
-          image: user?.image || "",
-          bio,
+          _id: `github-${profile.id}`, // Ensure unique ID
+          name: user?.name,
+          username: profile?.login,
+          email: user?.email,
+          image: user?.image,
+          bio: profile?.bio || "",
         });
       }
     
-      return true;
+      return true; // Allow login
     },
+    
     
     async jwt({ token, account, profile }) {
       if (account && profile?.id) {
@@ -37,11 +39,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           .withConfig({ useCdn: false })
           .fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id: profile.id });
     
-        token.id = user?._id; // Fallback ID if user is not found
+        token.id = user?._id || profile.id;  // Fallback to profile ID if user is not found
       }
-    
       return token;
-    },
+    },   
     
 
 
