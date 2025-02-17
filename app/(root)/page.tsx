@@ -12,7 +12,11 @@ async function Home({
   const query = (await searchParams).query;
 
   const params = { search: query || null };
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+  //const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+  const { data: posts } = await sanityFetch({
+    query: STARTUPS_QUERY,
+    params: { search: query || null, _cache_buster: Date.now() }
+  });
 
   return (
     <>
